@@ -3,10 +3,14 @@ import { Statistic } from './entities/statistic.entity';
 import { TransactionRepository } from '../transactions/repositories/transaction.repository';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { TransactionsEmptyException } from '../transactions/exceptions/transactions-empty.exception';
+import { Logger } from 'winston';
 
 @Injectable()
 export class StatisticsService {
-  constructor(private readonly transactionRepository: TransactionRepository) {}
+  constructor(
+    private readonly transactionRepository: TransactionRepository,
+    private readonly logger: Logger,
+  ) {}
 
   async getStatistics(): Promise<Statistic> {
     const transactions = await this.transactionRepository.findAll();
@@ -20,6 +24,10 @@ export class StatisticsService {
 
     if (filteredTransactions.length === 0) return this.getEmptyStatistics();
 
+    this.logger.log('info', 'Estatísticas geradas com sucesso.', {
+      context: 'TransactionsService',
+      details: 'Transaction created.',
+    });
     return this.calculateStatistics(filteredTransactions);
   }
 
