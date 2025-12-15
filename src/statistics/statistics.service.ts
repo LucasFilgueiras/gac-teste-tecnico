@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Statistic } from './entities/statistic.entity';
-import { TransactionRepository } from 'src/transactions/repositories/transaction.repository';
+import { TransactionRepository } from '../transactions/repositories/transaction.repository';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
-import { TransactionsEmptyException } from 'src/transactions/exceptions/transactions-empty.exception';
+import { TransactionsEmptyException } from '../transactions/exceptions/transactions-empty.exception';
 
 @Injectable()
 export class StatisticsService {

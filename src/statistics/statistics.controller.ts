@@ -1,6 +1,6 @@
 import { Controller, Get, UnprocessableEntityException } from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
-import { TransactionsEmptyException } from 'src/transactions/exceptions/transactions-empty.exception';
+import { TransactionsEmptyException } from '../transactions/exceptions/transactions-empty.exception';
 
 @Controller('statistics')
 export class StatisticsController {
