@@ -2,7 +2,10 @@ import { Controller, Get, UnprocessableEntityException } from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
 import { TransactionsEmptyException } from '../transactions/exceptions/transactions-empty.exception';
 import { Logger } from 'winston';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Statistic } from './entities/statistic.entity';
 
+@ApiTags('Statistics')
 @Controller('statistics')
 export class StatisticsController {
   constructor(
@@ -11,6 +14,20 @@ export class StatisticsController {
   ) {}
 
   @Get()
+  @ApiOperation({
+    summary: 'Calcula estatísticas das transações nos últimos 60 segundos',
+    description:
+      'Retorna a soma, média, máximo, mínimo e contagem das transações que ocorreram no último minuto.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Estatísticas calculadas com sucesso.',
+    type: Statistic,
+  })
+  @ApiResponse({
+    status: 422,
+    description: 'Não há transações disponíveis.',
+  })
   async findAll() {
     try {
       return await this.statisticsService.getStatistics();
