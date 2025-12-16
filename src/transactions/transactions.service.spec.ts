@@ -5,11 +5,17 @@ import { FutureDateException } from './exceptions/future-date.exception';
 import { AmountException } from './exceptions/amount.exception';
 import { TransactionsEmptyException } from './exceptions/transactions-empty.exception';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { Logger } from 'winston';
 
 const mockTransactionRepository = {
   create: jest.fn(),
   findAll: jest.fn(),
   remove: jest.fn(),
+};
+
+const mockLogger = {
+  log: jest.fn(),
+  error: jest.fn(),
 };
 
 describe('TransactionsService', () => {
@@ -25,6 +31,10 @@ describe('TransactionsService', () => {
         {
           provide: TransactionRepository,
           useValue: mockTransactionRepository,
+        },
+        {
+          provide: Logger,
+          useValue: mockLogger,
         },
       ],
     }).compile();

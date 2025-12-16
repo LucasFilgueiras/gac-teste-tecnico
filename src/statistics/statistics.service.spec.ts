@@ -4,6 +4,7 @@ import { TransactionsEmptyException } from '../transactions/exceptions/transacti
 import { Statistic } from './entities/statistic.entity';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { TransactionRepository } from '../transactions/repositories/transaction.repository';
+import { Logger } from 'winston';
 
 const mockTransactionRepository = {
   findAll: jest.fn(),
@@ -12,6 +13,11 @@ const mockTransactionRepository = {
 const MOCK_CURRENT_DATE_MS = new Date('2025-12-14T23:50:00.000Z').getTime();
 
 const MOCK_TIME_LIMIT_MS = MOCK_CURRENT_DATE_MS - 60000;
+
+const mockLogger = {
+  log: jest.fn(),
+  error: jest.fn(),
+};
 
 describe('StatisticsService', () => {
   let service: StatisticsService;
@@ -41,6 +47,10 @@ describe('StatisticsService', () => {
         {
           provide: TransactionRepository,
           useValue: mockTransactionRepository,
+        },
+        {
+          provide: Logger,
+          useValue: mockLogger,
         },
       ],
     }).compile();

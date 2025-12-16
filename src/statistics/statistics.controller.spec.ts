@@ -4,9 +4,15 @@ import { StatisticsController } from './statistics.controller';
 import { StatisticsService } from './statistics.service';
 import { TransactionsEmptyException } from '../transactions/exceptions/transactions-empty.exception';
 import { Statistic } from '../statistics/entities/statistic.entity';
+import { Logger } from 'winston';
 
 const mockStatisticsService = {
   getStatistics: jest.fn(),
+};
+
+const mockLogger = {
+  log: jest.fn(),
+  error: jest.fn(),
 };
 
 describe('StatisticsController', () => {
@@ -20,6 +26,10 @@ describe('StatisticsController', () => {
         {
           provide: StatisticsService,
           useValue: mockStatisticsService,
+        },
+        {
+          provide: Logger,
+          useValue: mockLogger,
         },
       ],
     }).compile();
