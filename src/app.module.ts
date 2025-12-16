@@ -13,10 +13,10 @@ import { APP_GUARD } from '@nestjs/core';
     StatisticsModule,
     HealthModule,
     ThrottlerModule.forRoot([
-      // 10 requisições por minuto
+      // RATE_LIMIT_TTL requisições a cada RATE_LIMIT_TTL milisegundos
       {
-        ttl: 60000,
-        limit: 10,
+        ttl: parseInt(process.env.RATE_LIMIT_TTL || '60000'),
+        limit: parseInt(process.env.RATE_LIMIT_MAX || '10'),
       },
     ]),
   ],
