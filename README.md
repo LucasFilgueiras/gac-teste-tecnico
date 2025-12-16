@@ -15,17 +15,18 @@ Siga estes passos para ter a aplicação rodando:
 1. Clonar o Repositório
    Obtenha o código-fonte do projeto:
 
-Bash
-
+```bash
 git clone https://github.com/LucasFilgueiras/gac-teste-tecnico.git
 cd gac-teste-tecnico
+```
 
 2. Configurar Variáveis de Ambiente
    Crie o arquivo de configuração de ambiente na raiz do projeto, baseado no template fornecido:
 
-Bash
-
+```bash
 cp .env.example .env
+```
+
 Edite o arquivo recém-criado .env e preencha as variáveis de acordo com suas configurações locais e do Docker.
 
 IMPORTANTE: Certifique-se de definir a porta (ex: PORT=3000) conforme especificado no .env.example.
@@ -35,9 +36,9 @@ IMPORTANTE: Certifique-se de definir a porta (ex: PORT=3000) conforme especifica
 
 # Inicia a construção e sobe os containers (em primeiro plano)
 
-Bash
-
+```bash
 docker-compose up --build
+```
 
 # Para rodar em segundo plano (detached mode)
 
@@ -48,13 +49,13 @@ Após a execução bem-sucedida, a aplicação estará acessível na porta confi
 🧪 Testes
 Para executar o suite de testes unitários da aplicação:
 
-Bash
-
 # Certifique-se de que as dependências do Node.js estão instaladas no seu host,
 
 # ou execute o comando dentro do container da aplicação.
 
+```bash
 yarn test
+```
 
 📖 Documentação da API
 A documentação interativa da API, gerada via Swagger/OpenAPI, está disponível na seguinte URL após a aplicação estar em execução:
